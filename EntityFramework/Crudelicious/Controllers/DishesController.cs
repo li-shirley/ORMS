@@ -36,6 +36,65 @@ namespace Crudelicious.Controllers
             return RedirectToAction("Index", "Home", new {area = ""});
         }
 
+        [HttpGet("/dishes/{dishId}")]
+        public IActionResult Details(int dishId)
+        {
+            Dish dish = db.Dishes.FirstOrDefault(d => d.DishId == dishId);
+
+            if (dish == null)
+            {
+                return RedirectToAction("Index", "Home", new {area = ""});
+            }
+            return View("Details", dish);
+        }
+
+        [HttpPost("/dishes/delete/{dishId}")]
+        public IActionResult Delete(int dishId)
+        {
+            Dish dish = db.Dishes.FirstOrDefault(d => d.DishId == dishId);
+
+            if (dish != null)
+            {
+                db.Dishes.Remove(dish);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", "Home", new {area = ""});
+        }
+
+        [HttpGet("/dishes/edit/{dishId}")]
+        public IActionResult Edit(int dishId)
+        {
+            Dish dish = db.Dishes.FirstOrDefault(d => d.DishId == dishId);
+
+            if (dish == null)
+            {
+                return RedirectToAction("Index", "Home", new {area = ""});
+            }
+            return View("Edit", dish);
+        } 
+
+        [HttpPost("/dishes/update/{dishId}")]
+        public IActionResult Update(Dish editedDish, int dishId)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return View("Edit", editedDish);
+            }
+            Dish dish = db.Dishes.FirstOrDefault(d => d.DishId == dishId);
+            if (dish == null)
+            {
+                return RedirectToAction("Index", "Home", new {area = ""});
+            }
+            dish.ChefName = editedDish.ChefName;
+            dish.Name = editedDish.Name;
+            dish.Calories = editedDish.Calories;
+            dish.Tastiness = editedDish.Tastiness;
+            dish.Description = editedDish.Description;
+            dish.UpdatedAt = DateTime.Now;
+            db.Dishes.Update(dish);
+            db.SaveChanges();
+            return RedirectToAction("Details", dishId);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

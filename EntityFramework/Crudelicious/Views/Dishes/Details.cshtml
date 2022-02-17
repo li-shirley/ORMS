@@ -1,0 +1,18 @@
+@model Dish
+<div class="container">
+    <div class="text-center border-bottom">
+        <h1 class="display-4">@Model.Name</h1>
+        <h5>@Model.ChefName</h5>
+    </div>
+    <div class="container w-50 p-3">
+        <p>@Model.Description</p>
+        <p>Calories: @Model.Calories</p>
+        <p>Tastiness: @Model.Tastiness</p>
+    </div>
+    <div class="row justify-content-center">
+        <form asp-controller="Dishes" asp-action="Delete" asp-route-dishId="@Model.DishId" method="post">
+            <button class="btn btn-danger m-5">Delete</button>
+        </form> 
+        <a class="btn btn-success m-5" asp-controller="Dishes" asp-action="Edit" asp-route-dishId="@Model.DishId">Edit</a>
+    </div>
+</div>

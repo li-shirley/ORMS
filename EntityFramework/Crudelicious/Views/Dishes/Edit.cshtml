@@ -1,12 +1,12 @@
 @model Dish
 <div class="text-center">
-    <h1 class="display-4">Add a new Dish!</h1>
+    <h1 class="display-4">Edit a Dish!</h1>
 </div>
 <div class="row"></div>
     <div class="col">
     </div>
     <div class="col shadow p-5">
-        <form asp-controller="Dishes" asp-action="Create" method="post">
+        <form asp-controller="Dishes" asp-action="Update" method="post">
 
             <div class="form-group">
                 <label class="form-label" asp-for="ChefName"></label>
@@ -44,7 +44,7 @@
                 <textarea class="form-control" rows="3" asp-for="Description"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
     <div class="col">

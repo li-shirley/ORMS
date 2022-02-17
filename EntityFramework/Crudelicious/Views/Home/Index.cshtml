@@ -16,8 +16,10 @@
             @foreach (Dish dish in Model)
             {
                 <p class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="/dishes/@dish.DishId">@dish.Name</a> 
+                    <a asp-controller="Dishes" asp-action="Details" asp-route-dishId="@dish.DishId">@dish.Name</a> 
                     by @dish.ChefName
+                    @* <a href="/dishes/@dish.DishId">@dish.Name</a> 
+                    by @dish.ChefName *@
                 </p>
             }
         </div>
