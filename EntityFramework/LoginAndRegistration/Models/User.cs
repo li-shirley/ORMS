@@ -9,27 +9,27 @@ namespace LoginAndRegistration.Models
         [Key]
         public int UserId { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "is required")]
         [MinLength(2, ErrorMessage = "must have at least 2 characters")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "is required")]
         [MinLength(2, ErrorMessage = "must have at least 2 characters")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "is required")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "is required")]
         [MinLength(8, ErrorMessage = "must have at least 8 characters")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [NotMapped]
-        [Required]
+        [Required (ErrorMessage = "is required")]
         [Compare("Password", ErrorMessage = "must match Password")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]

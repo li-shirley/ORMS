@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "Success Page";
+}
+
+
+<div class="jumbotron text-center">
+    <h1 class="display-3 text-success">Success!</h1>
+    <p class="lead">Welcome, @Context.Session.GetString("FirstName")!</p>
+    <form asp-controller="Home" asp-action="Logout">
+        <button class="btn btn-link">Logout</button>
+    </form>
+</div>
