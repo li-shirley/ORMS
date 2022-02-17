@@ -6,7 +6,7 @@ namespace Crudelicious.Models
     public class Dish
     {
         [Key]
-        public int PostId { get; set; }
+        public int DishId { get; set; }
 
         [Required]
         [Display(Name = "Chef's Name")]

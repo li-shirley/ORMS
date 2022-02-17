@@ -11,7 +11,6 @@ namespace Crudelicious.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
         private CrudeliciousContext db;
         public HomeController(CrudeliciousContext context)
@@ -22,7 +21,10 @@ namespace Crudelicious.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            return View("Index");
+            List<Dish> allDishes = db.Dishes
+            .OrderByDescending(dish => dish.CreatedAt)
+            .ToList();
+            return View("Index", allDishes);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

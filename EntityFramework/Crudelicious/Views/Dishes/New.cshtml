@@ -1,0 +1,49 @@
+@model Dish
+<div class="row"></div>
+    <div class="col">
+    </div>
+    <div class="col shadow p-5">
+        <form asp-controller="Dishes" asp-action="Create" method="post">
+
+            <div class="form-group">
+                <label class="form-label" asp-for="ChefName"></label>
+                <span asp-validation-for="ChefName" class="text-danger"></span>
+                <input class="form-control" asp-for="ChefName">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <input class="form-control" asp-for="Name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" asp-for="Calories"></label>
+                <span asp-validation-for="Calories" class="text-danger"></span>
+                <input class="form-control" asp-for="Calories">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" asp-for="Tastiness"></label>
+                <span asp-validation-for="Tastiness" class="text-danger"></span>
+                <select class="form-select" asp-for="Tastiness">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" asp-for="Description"></label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <textarea class="form-control" rows="3" asp-for="Description"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col">
+    </div>
+</div>

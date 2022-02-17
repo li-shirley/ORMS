@@ -11,12 +11,29 @@ namespace Crudelicious.Controllers
 {
     public class DishesController : Controller
     {
-        private readonly ILogger<DishesController> _logger;
 
         private CrudeliciousContext db;
         public DishesController(CrudeliciousContext context)
         {
             db = context;
+        }
+
+        [HttpGet("/dishes/new")]
+        public IActionResult New()
+        {
+            return View("New");
+        }
+
+        [HttpPost("/dishes/create")]
+        public IActionResult Create(Dish newDish)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return View("New");
+            }
+            db.Dishes.Add(newDish);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home", new {area = ""});
         }
 
 

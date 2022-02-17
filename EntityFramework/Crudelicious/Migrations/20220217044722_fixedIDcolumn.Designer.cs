@@ -3,14 +3,16 @@ using System;
 using Crudelicious.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crudelicious.Migrations
 {
     [DbContext(typeof(CrudeliciousContext))]
-    partial class CrudeliciousContextModelSnapshot : ModelSnapshot
+    [Migration("20220217044722_fixedIDcolumn")]
+    partial class fixedIDcolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
