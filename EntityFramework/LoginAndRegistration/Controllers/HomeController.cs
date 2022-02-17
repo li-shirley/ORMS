@@ -21,10 +21,14 @@ namespace LoginAndRegistration.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
-
+        [HttpGet("/login")]
+        public IActionResult Login()
+        {
+            return View("Login");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
