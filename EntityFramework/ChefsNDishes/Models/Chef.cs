@@ -31,7 +31,7 @@ namespace ChefsNDishes.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-        
+
 
         // Navigation Property. Allows navigation of two entity types (i.e. a chef's dishes). Need to use .Include in query to access
         public List<Dish> Dishes { get; set; }
@@ -39,6 +39,14 @@ namespace ChefsNDishes.Models
         public string FullName()
         {
             return FirstName + " " + LastName;
+        }
+
+        public int Age()
+        {
+            int today = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+            int dob = int.Parse(DOB.ToString("yyyyMMdd"));;
+            int age = (today - dob)/10000;
+            return age;
         }
     }
 }

@@ -37,6 +37,7 @@ namespace ChefsNDishes.Models
 
 
         // Foreign Key
+        [Display(Name = "Chef")]
         public int ChefId { get; set; }
         // Navigation Property. Allows navigation of two entity types (i.e. a dish's chef). Need to use .Include in query to access
         public Chef Cook { get; set; }

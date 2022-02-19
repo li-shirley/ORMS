@@ -1,8 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page/ All Chefs";
 }
+@model List<Chef>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container w-70 mx-auto">
+    <div class="d-flex justify-content-center">
+        <h1 class="display-4">Chefs</h1>
+        <h1 class="display-4 mx-3"> | </h1>
+        <h1 class="display-4">
+            <a href="/dishes"> Dishes</a>
+        </h1>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a href="/new">Add a Chef</a>
+    </div>
+    <h3 class="border-bottom">Check out our roster of Chefs!</h3>
+
+    <div>
+        <table class="table table-striped">
+                <tr>
+                    <th>Chef Name</th>
+                    <th>Age</th>
+                    <th># of Dishes</th>
+                </tr>
+                @foreach (Chef chef in Model)
+                {
+                    <tr>
+                        <td>@chef.FullName()</td>
+                        <td>@chef.Age()</td>
+                        <td>@chef.Dishes.Count</td>
+                    </tr>
+                }
+                </table>
+    </div>
 </div>
