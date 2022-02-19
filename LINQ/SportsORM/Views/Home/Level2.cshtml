@@ -3,9 +3,75 @@
     <div class="card-body">
         <p>Using the SportsORM, complete all the following queries and show their results on Level2.cshtml.</p>
         <ol>
-            <li>...all teams in the Atlantic Soccer Conference</li>
-            <li>...all (current) players on the Boston Penguins (Hint: Boston is the Location, Penguins is the TeamName)</li>
-            <li>...all (current) players in the International Collegiate Baseball Conference</li>
+            <li class="border-bottom my-5">All teams in the Atlantic Soccer Conference:
+                <table class="table table-striped">
+                <tr>
+                    <th>Team Name</th>
+                    <th>Team Location</th>
+                    <th>League</th>
+                </tr>
+                @foreach (var t in ViewBag.ASCTeams)
+                {
+                    <tr>
+                        <td>@t.TeamName</td>
+                        <td>@t.Location</td>
+                        <td>@t.CurrLeague.Name</td>
+                    </tr>
+                }
+                </table>
+            </li>
+
+            <li class="border-bottom my-5">All (current) players on the Boston Penguins (Hint: Boston is the Location, Penguins is the TeamName:
+                <table class="table table-striped">
+                <tr>
+                    <th>Play Name</th>
+                    <th>Team</th>
+                </tr>
+                @foreach (var p in ViewBag.BostonPenguinsPlayers)
+                {
+                    <tr>
+                        <td>@p.FirstName @p.LastName</td>
+                        <td>@p.CurrentTeam.Location @p.CurrentTeam.TeamName</td>
+                    </tr>
+                }
+                </table>
+            </li>
+
+            @* <li class="border-bottom my-5">All (current) players on the Boston Penguins (Hint: Boston is the Location, Penguins is the TeamName:
+                <table class="table table-striped">
+                <tr>
+                    <th>Team Name</th>
+                    <th>Team ID</th>
+                </tr>
+                @foreach (var t in ViewBag.Teams)
+                {
+                    <tr>
+                        <td>@t.TeamName</td>
+                        <td>@t.TeamId</td>
+                    </tr>
+                }
+                </table>
+            </li> *@
+
+            <li class="border-bottom my-5">All (current) players in the International Collegiate Baseball Conference:
+                <table class="table table-striped">
+                <tr>
+                    <th>Player Name</th>
+                    <th>Team Name</th>
+                    <th>League Name</th>
+                </tr>
+                @foreach (var l in ViewBag.ICBCPlayers)
+                {
+                    <tr>
+                        <td>@l.?</td>
+                        <td>@l.Teams.TeamName</td>
+                        <td>@l.Name</td>
+                    </tr>
+                }
+                </table>
+            </li>
+
+            
             <li>...all (current) players in the American Conference of Amateur Football with last name "Lopez"</li>
             <li>...all football players</li>
             <li>...all teams with a (current) player named "Sophia"</li>

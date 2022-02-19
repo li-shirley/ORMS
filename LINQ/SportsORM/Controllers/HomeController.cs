@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SportsORM.Models;
 
 
@@ -97,24 +98,38 @@ namespace SportsORM.Controllers
             return View("Level1");
         }
 
-
-
-
-
-
-
-
-
         [HttpGet("level_2")]
         public IActionResult Level2()
         {
-            return View();
+            ViewBag.ASCTeams = _context.Teams
+                .Where(t => t.LeagueId.Equals(5))
+                .Include(t => t.CurrLeague)
+                .ToList();
+
+            ViewBag.BostonPenguinsPlayers = _context.Players
+                .Where(p => p.TeamId.Equals(2))
+                .Include(p => p.CurrentTeam)
+                .ToList();
+
+            // ViewBag.Teams = _context.Teams.ToList();
+
+
+
+            ViewBag.ICBCPlayers = _context.Leagues
+                .Where(l => l.LeagueId == 2)
+                .Include(l => l.Teams)
+                .ThenInclude(t => t.CurrentPlayers)
+                .ToList();
+
+            return View("Level2");
+
+
         }
 
         [HttpGet("level_3")]
         public IActionResult Level3()
         {
-            return View();
+            return View("Level3");
         }
 
     }
