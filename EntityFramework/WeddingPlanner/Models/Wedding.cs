@@ -33,6 +33,7 @@ namespace WeddingPlanner.Models
 
         public int UserId { get; set; }
 
+        public User Host { get;set; }
         public List<UserWeddingRSVP> Attendees { get;set; }
     }
 }

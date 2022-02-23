@@ -26,7 +26,7 @@ namespace WeddingPlanner.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId != null)
             {
-                return View("Dashboard", "Wedding");
+                return RedirectToAction("Dashboard", "Weddings");
             }
             return View("Index");
         }
@@ -53,7 +53,7 @@ namespace WeddingPlanner.Controllers
 
             HttpContext.Session.SetInt32("UserId", newUser.UserId);
             
-            return RedirectToAction("Dashboard", "Wedding");
+            return RedirectToAction("Dashboard", "Weddings");
         }
 
         [HttpPost("/login")]
@@ -80,7 +80,7 @@ namespace WeddingPlanner.Controllers
 
                 HttpContext.Session.SetInt32("UserId", dbUser.UserId);
 
-                return RedirectToAction("Dashboard", "Wedding");
+                return RedirectToAction("Dashboard", "Weddings");
             }
             return View("Index");
         }

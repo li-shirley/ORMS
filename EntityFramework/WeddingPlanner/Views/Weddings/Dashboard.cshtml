@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container w-75 mx-auto p-5">
+    <h3>Welcome to the Wedding Planner</h3>
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Wedding</th>
+                <th scope="col">Date</th>
+                <th scope="col">Guests</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Wedding wedding in ViewBag.Weddings)
+            {
+                bool alreadyRSVP = wedding.Attendees
+                    .Any(r => r.UserId == Context.Session.GetInt32("UserId"));
+                <tr>
+                
+                    <td>@wedding.WedderOne & @wedding.WedderTwo</td>
+                    <td>@wedding.Date.Value.ToString("MMMM dd, yyyy")</td>
+                    <td>@wedding.Attendees.Count()</td>
+                    @if (Context.Session.GetInt32("UserId") == @wedding.UserId)
+                    {
+                        <td>
+                            <form action="weddings/@wedding.WeddingId/delete" method="POST">
+                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    }
+                    else if (alreadyRSVP)
+                    {
+                        <td>
+                            <form action="weddings/@wedding.WeddingId/rsvp" method="post">
+                                <button class="btn btn-link">un-RSVP</button>
+                            </form>
+                        </td>
+                    }
+                    else 
+                    {
+                        <td>
+                            <form action="weddings/@wedding.WeddingId/rsvp" method="post">
+                                <button class="btn btn-link">RSVP</button>
+                            </form>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href ="/weddings/new" class="btn btn-primary">New Wedding</a>
+</div>
