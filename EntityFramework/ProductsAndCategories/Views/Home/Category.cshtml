@@ -1,0 +1,45 @@
+@{
+ViewData["Title"] = "Category Page";
+}
+
+@model ProductCategory
+
+<div class="container mx-auto w-75 p-5">
+
+    <div class="d-flex justify-content-center mb-5">
+        <h1 class="display-4">@ViewBag.CategoryWithSelectedProducts.Name</h1>
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <h3 class="text-center">Products:</h3>
+                <ul class="list-group">
+                    @foreach (ProductCategory product in ViewBag.CategoryWithSelectedProducts.ProductCategories)
+                {
+                    <li class="list-group-item"> @product.Product.Name</li>
+                }
+                </ul>
+        </div>
+
+        <div class="col text-center">
+            <h3 class="text-center">Add Product:</h3>
+            <form asp-controller="Home" asp-action="CategoryAddProduct" asp-route-productId="@ViewBag.CategoryWithSelectedProducts.CategoryId" method="post">
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="ProductId"></label>
+                    <select class="form-select" asp-for="ProductId">
+                    @foreach (Product product in ViewBag.UnselectedProducts)
+                    {
+                        <option value="@product.ProductId">@product.Name</option>
+                    }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+

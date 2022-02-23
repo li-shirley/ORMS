@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Index/Products Page";
+}
+@model Product
+
+<div class="container mx-auto w-75 p-5">
+
+    <div class="d-flex justify-content-center mb-5">
+        <h1 class="display-4">Products</h1>
+        <h1 class="display-4 mx-3"> | </h1>
+        <h1 class="display-4">
+            <a href="/categories"> Categories</a>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center">New Product</h3>
+            <form asp-controller="Home" asp-action="CreateProduct" method="post">
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="Name"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input class="form-control" asp-for="Name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="Description"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <textarea class="form-control" asp-for="Description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="Price"></label>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                    <input class="form-control" asp-for="Price">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create Product</button>
+            </form>
+        </div>
+
+        <div class="col">
+            <h3 class="text-center">Existing Products</h3>
+            <div class="list-group mt-3">
+                @foreach (Product product in ViewBag.Products)
+                {
+                    <a href="products/@product.ProductId" class="list-group-item list-group-item-action">@product.Name</a>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

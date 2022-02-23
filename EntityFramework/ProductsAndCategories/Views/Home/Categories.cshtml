@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Categories Page";
+}
+@model Category
+
+<div class="container mx-auto w-75 p-5">
+
+    <div class="d-flex justify-content-center mb-5">
+        <h1 class="display-4">
+            <a href="/"> Products</a>
+        </h1>
+        <h1 class="display-4 mx-3"> | </h1>
+        <h1 class="display-4">Categories</h1>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center">New Category</h3>
+            <form asp-controller="Home" asp-action="CreateCategory" method="post">
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="Name"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input class="form-control" asp-for="Name">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create Category</button>
+            </form>
+        </div>
+
+        <div class="col">
+            <h3 class="text-center">Existing Categories</h3>
+            <div class="list-group mt-3">
+                @foreach (Category category in ViewBag.Categories)
+                {
+                    <a href="categories/@category.CategoryId" class="list-group-item list-group-item-action">@category.Name</a>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
