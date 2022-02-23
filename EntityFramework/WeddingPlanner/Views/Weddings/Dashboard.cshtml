@@ -20,33 +20,38 @@
                     .Any(r => r.UserId == Context.Session.GetInt32("UserId"));
                 <tr>
                 
-                    <td>@wedding.WedderOne & @wedding.WedderTwo</td>
-                    <td>@wedding.Date.Value.ToString("MMMM dd, yyyy")</td>
-                    <td>@wedding.Attendees.Count()</td>
-                    @if (Context.Session.GetInt32("UserId") == @wedding.UserId)
-                    {
                         <td>
-                            <form action="weddings/@wedding.WeddingId/delete" method="POST">
-                                <button class="btn btn-outline-danger btn-sm">Delete</button>
-                            </form>
+                            <a class="text-info" href="/weddings/@wedding.WeddingId/details">
+                            @wedding.WedderOne & @wedding.WedderTwo
+                            </a>
                         </td>
-                    }
-                    else if (alreadyRSVP)
-                    {
-                        <td>
-                            <form action="weddings/@wedding.WeddingId/rsvp" method="post">
-                                <button class="btn btn-link">un-RSVP</button>
-                            </form>
-                        </td>
-                    }
-                    else 
-                    {
-                        <td>
-                            <form action="weddings/@wedding.WeddingId/rsvp" method="post">
-                                <button class="btn btn-link">RSVP</button>
-                            </form>
-                        </td>
-                    }
+                        <td>@wedding.Date.Value.ToString("MMMM dd, yyyy")</td>
+                        <td>@wedding.Attendees.Count()</td>
+                        @if (Context.Session.GetInt32("UserId") == @wedding.UserId)
+                        {
+                            <td>
+                                @* <form asp-controller="Weddings" asp-action="Rsvp" asp-route-weddingId="@wedding.WeddingId" method="post"> *@
+                                <form action="/weddings/@wedding.WeddingId/delete" method="POST">
+                                    <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        }
+                        else if (alreadyRSVP)
+                        {
+                            <td>
+                                <form action="/weddings/@wedding.WeddingId/rsvp" method="post">
+                                    <button class="btn btn-link">un-RSVP</button>
+                                </form>
+                            </td>
+                        }
+                        else 
+                        {
+                            <td>
+                                <form action="/weddings/@wedding.WeddingId/rsvp" method="post">
+                                    <button class="btn btn-link">RSVP</button>
+                                </form>
+                            </td>
+                        }
                 </tr>
             }
         </tbody>

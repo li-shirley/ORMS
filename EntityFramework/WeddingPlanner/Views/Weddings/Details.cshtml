@@ -1,0 +1,24 @@
+@{
+ViewData["Title"] = "Wedding Details";
+}
+
+@model Wedding
+
+<div class="card mx-auto" style="width: 70%;">
+    <img class="card-img-top" src="..." alt="map tbd">
+    <div class="card-body">
+        <h3 class="card-title">@Model.WedderOne and @Model.WedderTwo's Wedding</h3>
+        <p class="card-text">Date: @Model.Date.Value.ToString("MMMM dd, yyyy")</p>
+        <h5>Guests:</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        @foreach (UserWeddingRSVP attendee in Model.Attendees)
+        {
+            <li class="list-group-item">@attendee.User.FirstName @attendee.User.LastName</li>
+        }
+
+    </ul>
+    <div class="card-body">
+        <p> Hosted By: @Model.Host.FirstName @Model.Host.LastName</p>
+    </div>
+</div>

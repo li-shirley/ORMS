@@ -70,7 +70,7 @@ namespace WeddingPlanner.Controllers
             newWedding.UserId = (int)uid;
             db.Weddings.Add(newWedding);
             db.SaveChanges();
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("Details", new { weddingId = newWedding.WeddingId });
         }
 
         [HttpPost("/weddings/{weddingId}/rsvp")]
@@ -101,6 +101,26 @@ namespace WeddingPlanner.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Dashboard");
+        }
+
+        [HttpGet("/weddings/{weddingId}/details")]
+        public IActionResult Details(int weddingId)
+        {
+            if (!loggedIn)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            Wedding wedding = db.Weddings
+                .Include(w => w.Host)
+                .Include(w => w.Attendees)
+                .ThenInclude(wa => wa.User)
+                .FirstOrDefault(w => w.WeddingId == weddingId);
+            
+            if (wedding == null)
+            {
+                return RedirectToAction("Dashboard");
+            }
+            return View("Details", wedding);
         }
 
 
