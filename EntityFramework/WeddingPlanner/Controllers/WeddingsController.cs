@@ -73,6 +73,24 @@ namespace WeddingPlanner.Controllers
             return RedirectToAction("Details", new { weddingId = newWedding.WeddingId });
         }
 
+        [HttpPost("/weddings/{weddingId}/delete")]
+        public IActionResult Delete(int weddingId)
+        {
+            if (!loggedIn)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
+            Wedding wedding = db.Weddings
+                .FirstOrDefault(w => w.WeddingId == weddingId);
+            if (wedding != null)
+            {
+                db.Weddings.Remove(wedding);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Dashboard");
+        }
+
         [HttpPost("/weddings/{weddingId}/rsvp")]
         public IActionResult Rsvp(int weddingId)
         {
@@ -122,6 +140,7 @@ namespace WeddingPlanner.Controllers
             }
             return View("Details", wedding);
         }
+
 
 
 

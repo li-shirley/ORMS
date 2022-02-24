@@ -20,6 +20,7 @@ namespace WeddingPlanner.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", ErrorMessage = "invalid format")]   
         [Required (ErrorMessage = "is required")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

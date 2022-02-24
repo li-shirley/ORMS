@@ -7,6 +7,7 @@ namespace WeddingPlanner.Models
     [NotMapped]
     public class LoginUser
     {
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", ErrorMessage = "invalid format")]  
         [Required (ErrorMessage = "is required")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
