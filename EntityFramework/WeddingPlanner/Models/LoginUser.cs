@@ -15,7 +15,6 @@ namespace WeddingPlanner.Models
 
         [Required (ErrorMessage = "is required")]
         [DataType(DataType.Password)]
-        [MinLength(8, ErrorMessage = "must have at least 8 characters")]
         [Display(Name = "Password")]
         public string LoginPassword { get; set; }
     }
